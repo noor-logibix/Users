@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.users.databinding.FragmentUserBinding
 
@@ -18,7 +19,9 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentUserBinding.inflate(inflater)
-        binding.viewModel = viewModel
+        viewModel.users.observe(viewLifecycleOwner, Observer {
+            binding.rvUsers.adapter = UserAdapter(it)
+        })
         return binding.root
     }
 

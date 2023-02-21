@@ -4,19 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".users.UsersFragment">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.users.users.UsersViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/users"
+            android:id="@+id/rvUsers"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
@@ -25,8 +18,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:userList="@{viewModel.users}"/>
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

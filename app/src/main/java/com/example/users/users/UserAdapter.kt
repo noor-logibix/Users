@@ -2,36 +2,25 @@ package com.example.users.users
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.users.databinding.UserBinding
 import com.example.users.network.UserDto
 
-class UserAdapter : ListAdapter<UserDto, UserAdapter.UserViewHolder>(DiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return UserViewHolder(UserBinding.inflate(LayoutInflater.from(parent.context)))
+class UserAdapter(val users: List<UserDto>) : RecyclerView.Adapter<UserAdapter.RVHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVHolder {
+        return RVHolder(UserBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user)
+    override fun onBindViewHolder(holder: RVHolder, position: Int) {
+        holder.bind(users[position])
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<UserDto>() {
-        override fun areItemsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
-            return oldItem === newItem
-        }
+    override fun getItemCount() = users.size
 
-        override fun areContentsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
-            return oldItem.id == newItem.id
-        }
-    }
-
-    class UserViewHolder(private var binding: UserBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(userDto: UserDto) {
-            binding.user = userDto
-            binding.executePendingBindings()
+    class RVHolder(private val binding: UserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: UserDto) {
+            binding.user = user
         }
     }
 }
