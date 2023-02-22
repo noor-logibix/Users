@@ -19,9 +19,8 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentUserBinding.inflate(inflater)
-        viewModel.users.observe(viewLifecycleOwner, Observer {
-            binding.rvUsers.adapter = UserAdapter(it)
-        })
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
